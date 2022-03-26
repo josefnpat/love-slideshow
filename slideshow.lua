@@ -28,6 +28,7 @@ function slideshow:update(dt)
       self:next()
     end
   elseif self._current_slide:type() == "Video" then
+    print(self._current_slide:tell())
     if not self._current_slide:isPlaying() then
       self:next()
     end
@@ -68,6 +69,7 @@ function slideshow:next()
     self._current_slide = love.graphics.newImage(self._slide_dir.."/"..file.name)
   elseif (file.ext == "ogv" or file.ext == "ogg") then
     self._current_slide = love.graphics.newVideo(self._slide_dir.."/"..file.name)
+    self._current_slide:rewind()
     self._current_slide:play()
   end
 end
@@ -77,10 +79,10 @@ function slideshow:draw()
   local alpha = time_into_alpha/self._slide_transition_time
   if self._last_slide then
     love.graphics.setColor(1,1,1,1*(1-alpha))
-    self:drawSlide(self._last_slide)
+    --self:drawSlide(self._last_slide)
   end
   if self._current_slide then
-    love.graphics.setColor(1,1,1,1*alpha)
+    love.graphics.setColor(1,1,1,1)
     self:drawSlide(self._current_slide)
   else
     love.graphics.printf(
