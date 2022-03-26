@@ -41,7 +41,7 @@ function slideshow:_getValidMedia()
     local path,file,extension = string.match(v,"(.-)([^\\]-([^\\%.]+))$")
     local ext = string.lower(extension)
     local fileinfo = {name = v, ext = ext}
-    if ext == "png" or ext == "jpg" or ext == "jpeg" or ext == "ogv" then
+    if ext == "png" or ext == "jpg" or ext == "jpeg" or ext == "ogv" or ext == "ogg" then
       table.insert(media,fileinfo)
     end
   end
@@ -66,9 +66,8 @@ function slideshow:next()
   self._current_slide_file = file
   if (file.ext == "png" or file.ext == "jpg" or file.ext == "jpeg") then
     self._current_slide = love.graphics.newImage(self._slide_dir.."/"..file.name)
-  elseif (file.ext == "ogv") then
+  elseif (file.ext == "ogv" or file.ext == "ogg") then
     self._current_slide = love.graphics.newVideo(self._slide_dir.."/"..file.name)
-    self._current_slide:rewind()
     self._current_slide:play()
   end
 end
