@@ -28,7 +28,6 @@ function slideshow:update(dt)
       self:next()
     end
   elseif self._current_slide:type() == "Video" then
-    print(self._current_slide:tell())
     if not self._current_slide:isPlaying() then
       self:next()
     end
@@ -79,7 +78,6 @@ function slideshow:draw()
   local alpha = time_into_alpha/self._slide_transition_time
   if self._last_slide then
     love.graphics.setColor(1,1,1,1*(1-alpha))
-    --self:drawSlide(self._last_slide)
   end
   if self._current_slide then
     love.graphics.setColor(1,1,1,1)
